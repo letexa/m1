@@ -12,16 +12,18 @@ class Controller_Index extends Controller {
     public function __construct() 
     {
         parent::__construct();
-     }
+    }
 	
-    /*
+    /**
      * Index URL
      *
     */
     public function action_index() 
     {
-        $this->_content['content']  = View::factory('index/main')->execute();
+        $this->_content['content'] = View::factory('index/main')
+                                        ->set('storage', Model::factory('Storage')->get_all()->_data)
+                                        ->set('audio', Model::factory('Audio')->get_all()->_data)
+                                        ->execute();
     }
     
-	
 }

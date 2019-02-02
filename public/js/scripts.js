@@ -1,3 +1,63 @@
-$(document).ready(function() {
-    console.log( "ready!" );
-});
+(function($) {
+    $.fn.audio = function(method, params) {
+        return audioMethods.init.apply(this, [params]);
+    }
+
+    var audioMethods = {
+        
+        addButton: null,
+        editButton: null,
+        form: null,
+        is_showForm: false,
+
+        init: function() {
+            audioMethods.addButton = $('._js_addAudioButton');
+            audioMethods.editButton = $('._js_editAudioButton');
+            audioMethods.form = $('._js_addAudioForm');
+            
+            audioMethods.addButton.off().on('click', function() {
+                audioMethods.addAudio();
+            });
+            
+            audioMethods.editButton.off().on('click', function() {
+                var data = $(this).data('audio');
+                audioMethods.editAudio(data);
+            });
+        },
+        
+        addAudio: function() {
+            audioMethods.showForm();
+        },
+        
+        editAudio: function(data) {
+            if (!audioMethods.is_showForm) {
+                audioMethods.showForm();
+            }
+            if (data) {
+                $.each(data, function(i, val) {
+                    $('[name='+i+']').val(val);
+                });
+            }
+        },
+        
+        showForm: function() {
+            if (audioMethods.form.hasClass('d-none')) {
+                audioMethods.form.addClass('d-block');
+                audioMethods.form.removeClass('d-none');
+                audioMethods.addButton.html('Скрыть');
+                audioMethods.addButton.removeClass('btn-primary')
+                audioMethods.addButton.addClass('btn-secondary');
+                audioMethods.is_showForm = true;
+            } else {
+                audioMethods.form.addClass('d-none');
+                audioMethods.form.removeClass('d-block');
+                audioMethods.addButton.html('Добавить альбом');
+                audioMethods.addButton.removeClass('btn-secondary')
+                audioMethods.addButton.addClass('btn-primary');
+                audioMethods.is_showForm = false;
+            }
+        }
+    }
+})(jQuery);
+
+

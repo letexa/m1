@@ -52,8 +52,7 @@ class App extends Singleton {
             $action = $this->__is_action($controller, 'action_' . $route->action);
         } 
         catch (Exception $e) {
-
-                return;
+            trigger_error($e->getMessage(), E_USER_ERROR);
         }
 
         $controller->$action();

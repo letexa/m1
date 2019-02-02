@@ -1,5 +1,10 @@
 <?php
 
+if ($_SERVER['ENV'] == 'DEVELOPMENT') {
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+}
+
 $application = __DIR__ . '/application';
 
 $system = __DIR__ . '/system';

@@ -41,7 +41,7 @@ class Controller extends Singleton {
 	 *
 	*/
 	protected $_config;
-	
+        
 	public function __construct() 
 	{
             parent::__construct();
@@ -49,10 +49,6 @@ class Controller extends Singleton {
             $this->route = Router::gi()->get();
             
             $this->request = new Request;
-            
-            if ( ! session_id() ) {
-                new Session();
-            }
 	}
 
 	public function __call( $methodName, $args = array() )

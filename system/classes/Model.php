@@ -10,7 +10,7 @@ class Model {
 	 * PDO object. 
 	 *
 	*/
-        protected $_db;
+        protected $_db = 'db';
 	
 	/*
 	 * Autoincrement column. 
@@ -127,7 +127,7 @@ class Model {
 	*/
 	public function where($variable, $condition, $value)
 	{
-            $value = Validation::is($value);
+            $value = Security::is($value);
 
             $sql = "SELECT * FROM {$this->_table} WHERE `{$variable}` {$condition} :value";
 
@@ -313,9 +313,9 @@ class Model {
 	*/
 	public function delete($id)
 	{
-		$id = Validation::is($id, 'integer');
+		$id = Security::is($id, 'integer');
 
-		$sql = "UPDATE {$this->_table} SET `status` = 0 WHERE `id` = :value";
+		$sql = "DELETE FROM {$this->_table} WHERE `id` = :value";
 		
 		$stmt = $this->_db->prepare($sql);
 		$stmt->bindParam( ':value', $id );
