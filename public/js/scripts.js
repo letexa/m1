@@ -9,6 +9,7 @@
         editButton: null,
         form: null,
         is_showForm: false,
+        is_edit: false,
 
         init: function() {
             audioMethods.addButton = $('._js_addAudioButton');
@@ -30,6 +31,7 @@
         },
         
         editAudio: function(data) {
+            audioMethods.is_edit = true;
             if (!audioMethods.is_showForm) {
                 audioMethods.showForm();
                 audioMethods.form.find($('[type=submit]')).html('Сохранить');
@@ -57,6 +59,11 @@
                 audioMethods.addButton.addClass('btn-primary');
                 audioMethods.form.find($('[type=submit]')).html('Создать');
                 audioMethods.is_showForm = false;
+                if (audioMethods.is_edit) {
+                    audioMethods.is_edit = false;
+                    audioMethods.form.find('input').val('');
+                }
+                
             }
         }
     }

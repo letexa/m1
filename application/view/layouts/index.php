@@ -24,5 +24,6 @@
         </div><!-- /.container -->
         
         <footer></footer>
+        <script type="text/javascript">$.fn.audio('init');</script>
   </body>
 </html>

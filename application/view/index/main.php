@@ -1,5 +1,6 @@
 <h1>MY CD</h1>
-<button type="button" class="btn btn-primary _js_addAudioButton">Добавить альбом</button>
+<a href="/storage">Хранилище</a><br />
+<button type="button" class="btn btn-primary mt-5 _js_addAudioButton">Добавить альбом</button>
 
 <form action="/audio/add" enctype="multipart/form-data" method="post" class="mt-5 d-none _js_addAudioForm">
     <input type="hidden" name="id" />
@@ -74,7 +75,7 @@
                 <td class="align-middle"><?=$item['duration']?></td>
                 <td class="align-middle"><?=$item['buy_date']?></td>
                 <td class="align-middle"><?=$item['cost']?></td>
-                <td class="align-middle"><?=$item['storage_id']?></td>
+                <td class="align-middle"><a href="/storage"><?=$item['storage_id']?></a></td>
                 <td class="align-middle">
                     <a href="javascript:void(0)" class="_js_editAudioButton" data-audio='<?= json_encode($item)?>'>Редактировать</a>
                     <a href="/audio/drop/<?=$item['id']?>">Удалить</a>
@@ -85,7 +86,4 @@
   </table>
 <?php } ?>
 
-
-
-<script type="text/javascript">$.fn.audio('init');</script>
     
