@@ -1,8 +1,13 @@
 <h1>MY CD</h1>
 <button type="button" class="btn btn-primary _js_addAudioButton">Добавить альбом</button>
 
-<form action="/audio/add" method="post" class="mt-5 d-none _js_addAudioForm">
-    <input type="hidden" name="id" value="" />
+<form action="/audio/add" enctype="multipart/form-data" method="post" class="mt-5 d-none _js_addAudioForm">
+    <input type="hidden" name="id" />
+    <div class="form-group">
+        <label for="inputImage">Обложка</label>
+        <input type="file" name="file" class="form-control-file" id="inputImage">
+        <input type="hidden" name="image">
+    </div>
     <div class="form-group">
         <label for="inputTitle">Название альбома</label>
         <input type="text" class="form-control" id="inputTitle" name="title" placeholder="Название альбома">
@@ -45,6 +50,7 @@
     <thead>
       <tr>
         <th scope="col">#</th>
+        <th scope="col">Обложка</th>
         <th scope="col">Название альбома</th>
         <th scope="col">Название артиста</th>
         <th scope="col">Год выпуска</th>
@@ -59,14 +65,17 @@
         <?php foreach ($audio as $item) { ?>
             <tr>
                 <th scope="row"><?=$item['id']?></th>
-                <td><?=$item['title']?></td>
-                <td><?=$item['author']?></td>
-                <td><?=$item['release_year']?></td>
-                <td><?=$item['duration']?></td>
-                <td><?=$item['buy_date']?></td>
-                <td><?=$item['cost']?></td>
-                <td><?=$item['storage_id']?></td>
                 <td>
+                    <img src="<?= $item['image'] ?: '/public/image/no_photo.png' ?>" height="100" />
+                </td>
+                <td class="align-middle"><?=$item['title']?></td>
+                <td class="align-middle"><?=$item['author']?></td>
+                <td class="align-middle"><?=$item['release_year']?></td>
+                <td class="align-middle"><?=$item['duration']?></td>
+                <td class="align-middle"><?=$item['buy_date']?></td>
+                <td class="align-middle"><?=$item['cost']?></td>
+                <td class="align-middle"><?=$item['storage_id']?></td>
+                <td class="align-middle">
                     <a href="javascript:void(0)" class="_js_editAudioButton" data-audio='<?= json_encode($item)?>'>Редактировать</a>
                     <a href="/audio/drop/<?=$item['id']?>">Удалить</a>
                 </td>

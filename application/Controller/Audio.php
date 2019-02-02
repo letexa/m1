@@ -18,7 +18,11 @@ class Controller_Audio extends Controller {
     {
         $model = Model::factory('Audio');
         
+        $image = File::upload();
+        echo $image;
+        
         $data = [
+            'image' => $image ?: (string)Security::xss_clean($_POST['image']),
             'title' => (string)Security::xss_clean($_POST['title']),
             'author' => (string)Security::xss_clean($_POST['author']),
             'release_year' => (int)Security::xss_clean($_POST['release_year']),

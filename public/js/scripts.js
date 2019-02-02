@@ -32,6 +32,7 @@
         editAudio: function(data) {
             if (!audioMethods.is_showForm) {
                 audioMethods.showForm();
+                audioMethods.form.find($('[type=submit]')).html('Сохранить');
             }
             if (data) {
                 $.each(data, function(i, val) {
@@ -54,6 +55,7 @@
                 audioMethods.addButton.html('Добавить альбом');
                 audioMethods.addButton.removeClass('btn-secondary')
                 audioMethods.addButton.addClass('btn-primary');
+                audioMethods.form.find($('[type=submit]')).html('Создать');
                 audioMethods.is_showForm = false;
             }
         }
